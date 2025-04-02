@@ -1,18 +1,20 @@
 FROM alpine:latest AS go-builder
 
-RUN apk update  && apk upgrade
+RUN apk update  && apk upgrade 
 
-RUN apk add go libpcap-dev
+RUN apk add go libpcap-dev 
 
-RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest 
 
-RUN go install -v github.com/edoardottt/scilla/cmd/scilla@latest
+RUN go install -v github.com/edoardottt/scilla/cmd/scilla@latest 
 
-RUN go install github.com/rix4uni/subdog@latest
+RUN go install github.com/rix4uni/subdog@latest 
 
-RUN go install -v github.com/owasp-amass/amass/v4/...@master
+RUN go install -v github.com/owasp-amass/amass/v4/...@master 
 
-RUN go install -v github.com/boy-hack/ksubdomain/cmd/ksubdomain@latest
+RUN go install -v github.com/boy-hack/ksubdomain/cmd/ksubdomain@latest 
+
+RUN go install -v github.com/projectdiscovery/notify/cmd/notify@latest 
 
 FROM alpine:latest AS runner
 
