@@ -2,7 +2,9 @@ FROM alpine:latest AS go-builder
 
 RUN apk update  && apk upgrade 
 
-RUN apk add go libpcap-dev 
+RUN apk add go libpcap-dev wget 
+
+RUN wget https://dl.min.io/client/mc/release/linux-amd64/mc 
 
 RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest 
 
@@ -29,6 +31,10 @@ COPY --from=go-builder /root/go/bin/subdog /bin/
 COPY --from=go-builder /root/go/bin/amass /bin/
 
 COPY --from=go-builder /root/go/bin/ksubdomain /bin/
+
+COPY --from=go-builder /mc /bin/
+
+RUN chmod +x /bin/mc 
 
 COPY ./entrypoint.sh .
 
