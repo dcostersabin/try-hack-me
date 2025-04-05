@@ -6,7 +6,7 @@ start_scan(){
 
 export -f start_scan
 
-DOMAINS=($(curl -s https://raw.githubusercontent.com/projectdiscovery/public-bugbounty-programs/refs/heads/main/chaos-bugbounty-list.json | jq '.programs | map(.domains[])[]'))
+DOMAINS=$(curl -s https://raw.githubusercontent.com/projectdiscovery/public-bugbounty-programs/refs/heads/main/chaos-bugbounty-list.json | jq '.programs | map(.domains[])[]')
 
 for DOMAIN in $DOMAINS;do
 	start_scan $DOMAIN
