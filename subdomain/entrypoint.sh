@@ -35,7 +35,7 @@ echo "Running [Amass]..."
 
 amass enum -active -timeout 10 -d $1 >> amass.txt
 
-cat amass.txt grep -oE '([a-zA-Z0-9-]+\.)+[a-zA-Z]+' | sort | uniq >> subdomain.txt
+cat amass.txt | grep -oE '([a-zA-Z0-9-]+\.)+[a-zA-Z]+' | sort | uniq >> subdomain.txt
 
 cat subdomain.txt | sort | uniq > filtered.txt
 
