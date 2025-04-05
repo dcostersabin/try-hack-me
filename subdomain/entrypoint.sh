@@ -28,7 +28,7 @@ echo $1 | ksubdomain e --stdin --silent >> subdomain.txt
 
 echo "Running [Amass]..."
 
-amass enum -passive -d $1 >> subdomain.txt
+amass enum -active -d $1 >> subdomain.txt
 
 cat subdomain.txt |  grep -oE '([a-zA-Z0-9-]+\.)+[a-zA-Z]+' | sort | uniq > filtered.txt
 
