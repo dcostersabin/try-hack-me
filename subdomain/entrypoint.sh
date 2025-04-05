@@ -33,7 +33,7 @@ echo $1 | ksubdomain e --stdin --silent >> subdomain.txt
 
 echo "Running [Amass]..."
 
-amass enum -active -d $1 >> amass.txt
+amass enum -active -timeout 10 -d $1 >> amass.txt
 
 cat amass.txt grep -oE '([a-zA-Z0-9-]+\.)+[a-zA-Z]+' | sort | uniq >> subdomain.txt
 
