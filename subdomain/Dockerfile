@@ -18,6 +18,8 @@ RUN go install -v github.com/boy-hack/ksubdomain/cmd/ksubdomain@latest
 
 RUN go install -v github.com/projectdiscovery/notify/cmd/notify@latest 
 
+RUN go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest
+
 FROM alpine:latest AS runner
 
 RUN apk add libpcap-dev jq sed 
@@ -31,6 +33,8 @@ COPY --from=go-builder /root/go/bin/subdog /bin/
 COPY --from=go-builder /root/go/bin/amass /bin/
 
 COPY --from=go-builder /root/go/bin/ksubdomain /bin/
+
+COPY --from=go-builder /root/go/bin/dnsx /bin/
 
 COPY --from=go-builder /mc /bin/
 
