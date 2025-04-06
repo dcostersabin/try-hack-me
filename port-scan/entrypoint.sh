@@ -2,7 +2,7 @@
 
 DOMAIN=$(echo ${1} |  sed -r 's/\./_/g' )
 
-mc get subdomains/subdomains/$DOMAIN/resp.txt /tmp/resp.txt
+mc get s3server/subdomains/$DOMAIN/resp.txt /tmp/resp.txt
 
 ips=$(grep -E -o "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)" /tmp/resp.txt)
 
