@@ -6,9 +6,9 @@ start_scan(){
 
 export -f start_scan
 
-TARGET_DOMAINS=$(mc ls subdomains/subdomains --json | jq .key | sed 's/"//g' | sed 's/\///g' | sort | uniq)
+TARGET_DOMAINS=$(mc ls s3server/subdomains --json | jq .key | sed 's/"//g' | sed 's/\///g' | sort | uniq)
 
-SCANNED=$(mc ls subdomains/portstore --json | jq .key | sed 's/"//g' | sed 's/\///g' | sort | uniq)
+SCANNED=$(mc ls s3server/portstore --json | jq .key | sed 's/"//g' | sed 's/\///g' | sort | uniq)
 
 for DOMAIN in $TARGET_DOMAINS;do
 
