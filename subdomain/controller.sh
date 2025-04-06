@@ -6,10 +6,18 @@ start_scan(){
 
 export -f start_scan
 
-DOMAINS=$(curl -s https://raw.githubusercontent.com/projectdiscovery/public-bugbounty-programs/refs/heads/main/chaos-bugbounty-list.json | jq '.programs | map(.domains[])[]' | sort | uniq | sed 's/"//g') 
+SCANNED=$(mc ls subdomains/subdomains --json | jq .key | sed 's/"//g' | sed 's/\///g' | sort | uniq)
+
+DOMAINS=$(curl -s https://raw.githubusercontent.com/projectdiscovery/public-bugbounty-programs/refs/heads/main/chaos-bugbounty-list.json | jq '.programs | map(.domains[])[]' | sort | uniq | sed 's/"//g')
 
 for DOMAIN in $DOMAINS;do
-	start_scan $DOMAIN
+
+	if [[ ${SCANNED[@]} =~ $DOMAIN ]]
+	then
+		echo "Skipping Scan For '$DOMAIN'"
+	else
+		start_scan $DOMAIN
+	fi
 done
 
 
