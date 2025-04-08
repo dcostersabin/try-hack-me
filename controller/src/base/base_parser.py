@@ -6,6 +6,7 @@ parser.add_argument(
     "--cpu",
     "-c",
     help="Total parallel CPU",
+    type=int,
     default=4,
 )
 

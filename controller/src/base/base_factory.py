@@ -10,7 +10,17 @@ class BaseFactory(ABC):
         super(BaseFactory, self).__init__()
 
     def start(self):
+        self.pre_start()
         self._run()
+        self.post_start()
+
+    @abstractmethod
+    def pre_start(self):
+        raise NotImplementedError("Pre Start Not Implemented")
+
+    @abstractmethod
+    def post_start(self):
+        raise NotImplementedError("Post Start Not Implemented")
 
     @abstractmethod
     def task(self, param):
