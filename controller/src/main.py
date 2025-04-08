@@ -1,5 +1,9 @@
-from base import parser
 from argparse import Namespace
+
+from base import parser
+from services import ServiceEnum as S
+from services import ServiceFactory
+from services.subdomain import StopSubdomainScans
 
 
 class Cli:
@@ -8,7 +12,17 @@ class Cli:
         self.params: Namespace = params
 
     def start(self):
-        breakpoint()
+        self._run()
+
+    def _run(self):
+        if self.params.subdomain:
+            ServiceFactory.get_service(
+                cpu=self.params.cpu,
+                name=S.SUBDOMAIN,
+            ).start()
+
+        if self.params.stop_subdomain:
+            StopSubdomainScans().start()
 
 
 if __name__ == "__main__":

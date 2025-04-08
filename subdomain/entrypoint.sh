@@ -46,12 +46,12 @@ cat filtered.txt | dnsx -silent -a -resp >> resp.txt
 
 echo "Uploading Scanned Results"
 
-mc put ./subdomain.txt s3server/subdomains/$DOMAIN/subdomain.txt
+mc put ./subdomain.txt s3server/domains/$DOMAIN/subdomain.txt
 
-mc put ./filtered.txt s3server/subdomains/$DOMAIN/filtered.txt
+mc put ./filtered.txt s3server/domains/$DOMAIN/filtered.txt
 
-mc put ./amass.txt s3server/subdomains/$DOMAIN/amass.txt
+mc put ./amass.txt s3server/domains/$DOMAIN/amass.txt
 
-mc put ./resp.txt s3server/subdomains/$DOMAIN/resp.txt
+mc put ./resp.txt s3server/domains/$DOMAIN/resp.txt
 
 cat filtered.txt

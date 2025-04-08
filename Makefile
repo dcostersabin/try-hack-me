@@ -10,3 +10,9 @@ build-subdomain:
 build-port-scanner:
 	@docker build -t $(REGISTRY)/$(ORG)/thm_port_scanner:latest -f port-scan/Dockerfile port-scan/;
 	@docker push $(REGISTRY)/$(ORG)/thm_port_scanner:latest
+
+
+.ONSHELL:
+build-controller:
+	@docker build -t $(REGISTRY)/$(ORG)/thm_controller:latest -f controller/docker/Dockerfile controller/;
+	@docker push $(REGISTRY)/$(ORG)/thm_controller:latest

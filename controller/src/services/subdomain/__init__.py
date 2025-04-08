@@ -1,13 +1,7 @@
-from base import BaseController
+from services.subdomain.s_subdomain import SubdomainService
+from services.subdomain.stop import StopSubdomainScans
 
-
-class SubdomainService(BaseController):
-
-    def task(self, *args, **kwargs):
-        pass
-
-    def parameters(self, *args, **kwargs):
-        pass
-
-    def process_responses(self, reponses):
-        breakpoint()
+__all__ = [
+    "SubdomainService",
+    "StopSubdomainScans",
+]

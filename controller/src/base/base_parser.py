@@ -18,6 +18,12 @@ services.add_argument(
 )
 
 services.add_argument(
+    "--stop-subdomain",
+    "-ss",
+    action="store_true",
+)
+
+services.add_argument(
     "--port",
     "-p",
     action="store_true",
