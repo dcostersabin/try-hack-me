@@ -29,3 +29,9 @@ services.add_argument(
     "-p",
     action="store_true",
 )
+
+services.add_argument(
+    "--stop-portscan",
+    "-sp",
+    action="store_true",
+)

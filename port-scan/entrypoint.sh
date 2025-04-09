@@ -6,18 +6,10 @@ mc alias set s3server $SERVER_URL $ACCESS_KEY $SECRET_KEY
 
 mc admin info s3server
 
-mc get s3server/subdomains/$DOMAIN/resp.txt /tmp/resp.txt
-
-ips=$(grep -E -o "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)" /tmp/resp.txt)
-
-echo "Running [Nmap] For ${1} ..."
-
-for ip in $ips; do
-	echo "Running [Nmap] For ${1} ${ip} ..."
-	nmap  $ip -p- -sC -v -oN "/tmp/port_${ip}" -Pn
-	echo "Uploading Results Of [Nmap] For ${1} ${ip} ..."
-	mc put "/tmp/port_${ip}" "s3server/portstore/${DOMAIN}/port-scan/port_${ip}"
-done
+echo "Running [Nmap] For ${1} ${ip} ..."
+nmap  $2 -p- -sC -v -oN "/tmp/port_${2}" -Pn
+echo "Uploading Results Of [Nmap] For ${1} ${2} ..."
+mc put "/tmp/port_${2}" "s3server/portstore/${DOMAIN}/port-scan/port_${2}"
 
 
 
