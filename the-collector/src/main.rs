@@ -1,13 +1,28 @@
 mod collector;
 mod s3;
+mod utils;
 
-use collector::IpCollector;
+use clap::Parser;
+use collector::{IpCollector, Subdomains};
+use utils::{Cli, Commands};
 
 #[tokio::main]
 async fn main() {
-    let mut ip_collecotr = IpCollector::new();
+    let cli = Cli::parse();
 
-    for ip in ip_collecotr.get_all_ips().await.unwrap() {
-        println!("{:?}", ip);
+    match &cli.command {
+        Some(Commands::Subdomain { list }) => {
+            if *list {
+                let mut subdomain = Subdomains::new();
+                println!("{:?}", subdomain.get_all_ips().await.unwrap());
+            }
+        }
+        Some(Commands::Ip { list }) => {
+            if *list {
+                let mut ips = IpCollector::new();
+                println!("{:?}", ips.get_all_ips().await.unwrap());
+            }
+        }
+        None => {}
     }
 }

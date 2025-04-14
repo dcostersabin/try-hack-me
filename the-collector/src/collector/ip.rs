@@ -1,6 +1,5 @@
 use crate::s3::MinioClient;
 use regex::Regex;
-use std::collections::HashSet;
 pub struct IpCollector {}
 
 impl IpCollector {
@@ -8,9 +7,7 @@ impl IpCollector {
         Self {}
     }
 
-    pub async fn get_all_ips(&mut self) -> Result<HashSet<String>, Box<dyn std::error::Error>> {
-        let mut ips: HashSet<String> = HashSet::new();
-
+    pub async fn get_all_ips(&mut self) -> Result<(), Box<dyn std::error::Error>> {
         let mut minio = MinioClient::new(true, false, "domains".to_string());
         let keys = minio.get_all_keys().await.unwrap();
 
@@ -20,11 +17,11 @@ impl IpCollector {
 
                 let text = minio.get_object(key).await.unwrap();
                 for cap in re.captures_iter(&text) {
-                    ips.insert(cap[0].to_string());
+                    println!("{:?}", cap[0].to_string());
                 }
             }
         }
 
-        return Ok(ips);
+        return Ok(());
     }
 }
