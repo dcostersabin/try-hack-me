@@ -10,10 +10,10 @@ the-collector subdomain --list > /tmp/subdomains.txt
 
 echo "Fetching Ips..."
 
-the-collector ip --list > /tmp/ip.txt
+the-collector ip --list > /tmp/ips.txt
 
 echo "Uploading Results ..."
 
-mc put ./subdomains.txt s3server/the-collector/subdomains.txt
+mc put /tmp/subdomains.txt s3server/the-collector/subdomains.txt
 
-mc put ./ip.txt s3server/the-collector/ip.txt
+mc put /tmp/ips.txt s3server/the-collector/ips.txt
