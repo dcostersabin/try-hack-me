@@ -1,6 +1,5 @@
 use crate::s3::MinioClient;
 pub struct Subdomains {}
-use regex::Regex;
 
 impl Subdomains {
     pub fn new() -> Self {
@@ -13,13 +12,23 @@ impl Subdomains {
 
         for key in keys {
             if key.contains("filtered.txt") {
-                let text = minio.get_object(key).await.unwrap().replace("\r", "");
+                let text = minio
+                    .get_object(key)
+                    .await
+                    .unwrap()
+                    .replace("\r", "")
+                    .replace("\"", "");
 
-                let re =
-                    Regex::new(r"([\w+]+://)?([\w\d-]+\.)*[\w-]+[\.:]\w+([/\?=&\#\.]?[\w-]+)*/?")
-                        .unwrap();
-                for domain in re.find_iter(&text) {
-                    println!("{}", domain.as_str());
+                let lines = text.split("\n");
+
+                for line in lines {
+                    let col: Vec<&str> = line.split(" ").collect();
+                    if col.len() > 0 {
+                        let domain: Vec<&str> = col[0].split(".").collect();
+                        if domain.len() >= 2 {
+                            println!("{:?}", col[0]);
+                        }
+                    }
                 }
             }
         }
