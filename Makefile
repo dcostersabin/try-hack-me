@@ -16,3 +16,8 @@ build-port-scanner:
 build-controller:
 	@docker build -t $(REGISTRY)/$(ORG)/thm_controller:latest -f controller/docker/Dockerfile controller/;
 	@docker push $(REGISTRY)/$(ORG)/thm_controller:latest
+
+.ONSHELL:
+build-collector:
+	@docker build -t $(REGISTRY)/$(ORG)/thm_the_collector:latest -f the-collector/docker/Dockerfile the-collector/;
+	@docker push $(REGISTRY)/$(ORG)/thm_the_collector:latest
