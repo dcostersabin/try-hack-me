@@ -25,7 +25,11 @@ impl Subdomains {
                     let col: Vec<&str> = line.split(" ").collect();
                     if col.len() > 0 {
                         let domain: Vec<&str> = col[0].split(".").collect();
-                        if !col[0].contains("{") && !col[0].contains("}") && domain.len() > 1 {
+                        if !col[0].contains("*")
+                            && !col[0].contains("{")
+                            && !col[0].contains("}")
+                            && domain.len() > 1
+                        {
                             println!("{:?}", col[0]);
                         }
                     }
