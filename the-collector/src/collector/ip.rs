@@ -17,7 +17,7 @@ impl IpCollector {
 
                 let text = minio.get_object(key).await.unwrap();
                 for cap in re.captures_iter(&text) {
-                    println!("{:?}", cap[0].to_string());
+                    println!("{}", cap[0].to_string());
                 }
             }
         }

@@ -6,11 +6,11 @@ mc admin info s3server
 
 echo "Fetching Subdomains..."
 
-the-collector subdomain --list > /tmp/subdomains.txt
+the-colletor subdomain --list | sort | uniq > /tmp/subdomains.txt
 
 echo "Fetching Ips..."
 
-the-collector ip --list > /tmp/ips.txt
+the-collector ip --list | sort | uniq > /tmp/ips.txt
 
 echo "Uploading Results ..."
 

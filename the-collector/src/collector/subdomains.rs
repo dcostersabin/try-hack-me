@@ -30,7 +30,7 @@ impl Subdomains {
                             && !col[0].contains("}")
                             && domain.len() > 1
                         {
-                            println!("{:?}", col[0]);
+                            println!("{}", col[0]);
                         }
                     }
                 }
